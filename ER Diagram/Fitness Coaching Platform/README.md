@@ -251,3 +251,11 @@ plans.plan_id < plan_content.plan_id                (1:N)
 This database design provides a **clean, normalized, and scalable structure** for an online fitness coaching platform. It efficiently models real-world scenarios like subscriptions, consultations, and progress tracking while maintaining flexibility for future enhancements.
 
 ---
+
+## ER Diagram
+
+The ER diagram is included in this repository as: 
+
+<p align="center">
+<img src="Fitness Influencer Coaching Platform.png" width="800">
+</p>
