@@ -116,7 +116,9 @@ Tracks all financial transactions related to appointments and consultations.
 This ER design balances:
 - **Normalization** (clean structure)
 - **Practical optimization** (faster queries)
-- **Real-world workflow modeling
+- Real-world workflow modeling
 It is suitable for a **small to mid-scale clinic system** and can be extended further as needed.
 
----
+<p align="center">
+<img src="./Clinic Appointment/Clinic Appointment and Diagnostics Platform.png" width="800">
+</p>
