@@ -1,0 +1,148 @@
+
+users [icon:user, color: green] {
+  user_id serial pk
+  name varchar(100)
+  email varchar(150) unique not null
+  phone varchar(20)
+  role enum('CLIENT','TRAINER')
+
+  created_at timestamp
+}
+
+trainers [icon:user-check, color: blue] {
+  trainer_id int pk fk
+  bio text
+  specialization varchar(255)
+  experience_years int
+}
+
+clients [icon:user, color: teal] {
+  client_id int pk fk
+  age int
+  gender varchar(10)
+  fitness_goal text
+  medical_conditions text
+}
+
+plans [icon:clipboard, color: orange] {
+  plan_id serial pk
+  trainer_id int fk
+  name varchar(150)
+  description text
+  price decimal(10,2)
+  duration_days int
+  plan_type enum('CONSULTATION','FULL_COACHING','WORKOUT_ONLY','DIET_ONLY')
+
+  created_at timestamp
+}
+
+subscriptions [icon:repeat, color: purple] {
+  subscription_id serial pk
+  client_id int fk
+  plan_id int fk
+  start_date date
+  end_date date
+  status enum('ACTIVE','COMPLETED','CANCELLED')
+
+  created_at timestamp
+}
+
+payments [icon:credit-card, color: yellow] {
+  payment_id serial pk
+  subscription_id int fk
+  amount decimal(10,2)
+  payment_date timestamp
+  payment_method varchar(50)
+  status enum('SUCCESS','FAILED','REFUNDED')
+}
+
+sessions [icon:video, color: pink] {
+  session_id serial pk
+
+  trainer_id int fk
+  client_id int fk
+  subscription_id int fk nullable
+  session_type enum('CONSULTATION','LIVE_WORKOUT')
+  scheduled_at timestamp
+  duration int  //in min
+  status enum('SCHEDULED','COMPLETED','CANCELLED')
+  meeting_link text
+
+  created_at timestamp
+}
+
+checkins [icon:activity, color: brown] {
+  checkin_id serial pk
+  client_id int fk
+  subscription_id int fk
+  submitted_at timestamp
+  weight decimal(5,2)
+  notes text
+  adherence_score int
+
+  created_at timestamp
+}
+
+body_measurements [icon:ruler, color: red] {
+  measurement_id serial pk
+  checkin_id int fk
+  chest decimal(5,2)
+  waist decimal(5,2)
+  hips decimal(5,2)
+  body_fat_percentage decimal(5,2)
+}
+
+progress_media [icon:image, color: gray] {
+  media_id serial pk
+  checkin_id int fk
+  media_url text
+  type enum('IMAGE','VIDEO')
+}
+
+trainer_notes [icon:file-text, color: black] {
+  note_id serial pk
+  checkin_id int fk
+  trainer_id int fk
+  note_text text
+
+  created_at timestamp
+}
+
+plan_content [icon:list, color: cyan] {
+  content_id serial pk
+  plan_id int fk
+  type enum('WORKOUT','DIET')
+  title varchar(150)
+  description text
+}
+
+
+// =========================
+//RELATIONSHIPS
+// =========================
+
+users.user_id - trainers.trainer_id
+users.user_id - clients.client_id
+
+trainers.trainer_id < plans.trainer_id
+
+clients.client_id < subscriptions.client_id
+plans.plan_id < subscriptions.plan_id
+
+subscriptions.subscription_id < payments.subscription_id
+
+trainers.trainer_id < sessions.trainer_id
+clients.client_id < sessions.client_id
+subscriptions.subscription_id < sessions.subscription_id
+
+clients.client_id < checkins.client_id
+subscriptions.subscription_id < checkins.subscription_id
+
+checkins.checkin_id - body_measurements.checkin_id
+checkins.checkin_id < progress_media.checkin_id
+checkins.checkin_id < trainer_notes.checkin_id
+
+trainers.trainer_id < trainer_notes.trainer_id
+
+plans.plan_id < plan_content.plan_id
+
