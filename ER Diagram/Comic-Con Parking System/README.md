@@ -179,4 +179,6 @@ Each parking session records:
 
 This ERD represents a **scalable, real-world parking system** suitable for large events. It ensures efficient tracking of vehicles, optimized parking allocation, and accurate billing while maintaining flexibility for future enhancements.
 
----
+<p align="center">
+<img src="./Comic-Con Parking System/Comic-Con Parking System.png" width="800">
+</p>
