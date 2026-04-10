@@ -1,3 +1,4 @@
+
 # 🛗 LiftGrid Systems – Smart Elevator Control Platform (ERD)
 
 ## 📌 Overview
@@ -202,4 +203,6 @@ This ER design is:
 
 It accurately models a **multi-building intelligent elevator control system** capable of handling high traffic, operational monitoring, and long-term analytics.
 
----
+<p align="center">
+<img src="./Smart Elevator Control/Smart Elevator Control.png" width="1000">
+</p>
